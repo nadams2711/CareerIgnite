@@ -124,7 +124,7 @@ export function CareerCoachDialog({
         Ask AI Coach
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-lg max-h-[85vh] flex flex-col">
+      <DialogContent className="sm:max-w-lg max-h-[85vh] flex flex-col bg-card text-card-foreground">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Bot className="h-5 w-5 text-blue-600" />
@@ -149,8 +149,8 @@ export function CareerCoachDialog({
         >
           {messages.length === 0 && (
             <div className="text-center py-6">
-              <Bot className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-              <p className="text-sm text-muted-foreground mb-4">
+              <Bot className="h-10 w-10 text-card-foreground/50 mx-auto mb-3" />
+              <p className="text-sm text-card-foreground/70 mb-4">
                 Ask me anything about becoming a {careerTitle}!
               </p>
               <div className="flex flex-wrap justify-center gap-2">
@@ -183,7 +183,7 @@ export function CareerCoachDialog({
                 className={`rounded-lg px-3 py-2 text-sm max-w-[80%] whitespace-pre-wrap ${
                   msg.role === "user"
                     ? "bg-blue-600 text-white"
-                    : "bg-muted"
+                    : "bg-muted text-card-foreground"
                 }`}
               >
                 {msg.content || (loading && i === messages.length - 1 && (
