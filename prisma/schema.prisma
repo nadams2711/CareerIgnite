@@ -1,0 +1,265 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+enum AustralianState {
+  NSW
+  VIC
+  QLD
+  WA
+  SA
+  TAS
+  NT
+  ACT
+}
+
+enum PathwayType {
+  UNIVERSITY
+  TAFE
+  TRADE
+  APPRENTICESHIP
+  SPORTS
+  ARTS
+}
+
+enum CareerCategory {
+  TECHNOLOGY
+  HEALTH
+  TRADES
+  CREATIVE
+  BUSINESS
+  EDUCATION
+  SCIENCE
+  SPORTS
+  SERVICES
+}
+
+model User {
+  id            String           @id @default(cuid())
+  name          String?
+  email         String           @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole         @default(STUDENT)
+  state         AustralianState?
+  grade         String?
+  interests     String[]
+  skillRatings  Json?
+  sharePeers    Boolean          @default(false)
+  schoolId      String?
+  school        School?          @relation(fields: [schoolId], references: [id])
+  adminSchoolId String?          @unique
+  adminSchool   School?          @relation("SchoolAdmin", fields: [adminSchoolId], references: [id])
+  accounts      Account[]
+  sessions      Session[]
+  plans                Plan[]
+  subjectProgress      SubjectProgress[]
+  qualificationProgress QualificationProgress[]
+  parentLinks          ParentChild[]    @relation("ChildParents")
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Career {
+  id          String         @id @default(cuid())
+  title       String
+  slug        String         @unique
+  description String
+  image       String?
+  dayInLife   String?
+  progression Json?
+  impact      String?
+  challenges  Json?
+  salaryLow   Int
+  salaryHigh  Int
+  growthRate  Float
+  skills      String[]
+  category    CareerCategory
+  pathways    StatePathway[]
+  planCareers PlanCareer[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model StatePathway {
+  id                String          @id @default(cuid())
+  state             AustralianState
+  careerId          String
+  career            Career          @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  pathwayType       PathwayType
+  subjects          String[]
+  rankTarget        Int?
+  institutions      Json
+  duration          String
+  entryRequirements String?
+
+  @@unique([state, careerId, pathwayType])
+}
+
+model Plan {
+  id        String       @id @default(cuid())
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  timeline  Json?
+  pdfUrl    String?
+  careers   PlanCareer[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model PlanCareer {
+  id       String @id @default(cuid())
+  planId   String
+  plan     Plan   @relation(fields: [planId], references: [id], onDelete: Cascade)
+  careerId String
+  career   Career @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  priority              Int    @default(0)
+  subjectProgress       SubjectProgress[]
+  qualificationProgress QualificationProgress[]
+
+  @@unique([planId, careerId])
+}
+
+// ─── School & Peer Insights ───────────────────────────────
+
+model School {
+  id          String          @id @default(cuid())
+  code        String          @unique
+  name        String
+  suburb      String
+  state       AustralianState
+  tier        SchoolTier      @default(FREE)
+  trialEndsAt DateTime?
+  students    User[]
+  admin       User?           @relation("SchoolAdmin")
+  insights    SchoolInsight[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model SchoolInsight {
+  id               String   @id @default(cuid())
+  schoolId         String
+  school           School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  period           String   // e.g. "2026-03" (monthly snapshot)
+  interestCounts   Json     // {"CREATIVE": 42, "TECHNOLOGY": 28, ...}
+  careerCounts     Json     // {"ux-designer": 15, "electrician": 8, ...}
+  subjectCounts    Json     // {"Visual Art": 38, "Math Methods": 25, ...}
+  pathwayCounts    Json?    // {"UNIVERSITY": 45, "TAFE": 12, "TRADE": 8}
+  skillAvgs        Json?    // {"math": 3.2, "creative": 4.1}
+  gradeCounts      Json?    // {"Year 10": {"TECHNOLOGY": 12}, ...}
+  engagementStats  Json?    // {"quizCompleted": 38, "planCreated": 22, "totalRegistered": 55}
+  atarAvg          Float?
+  studentCount     Int      @default(0)
+  createdAt        DateTime @default(now())
+
+  @@unique([schoolId, period])
+}
+
+// ─── Parent Portal ────────────────────────────────────────
+
+model Parent {
+  id        String        @id @default(cuid())
+  email     String        @unique
+  name      String?
+  children  ParentChild[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model ParentChild {
+  id          String @id @default(cuid())
+  parentId    String
+  parent      Parent @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  childId     String
+  child       User   @relation("ChildParents", fields: [childId], references: [id], onDelete: Cascade)
+  inviteToken String @unique
+  accepted    Boolean @default(false)
+  createdAt   DateTime @default(now())
+
+  @@unique([parentId, childId])
+}
+
+// ─── Progress Tracking ───────────────────────────────────
+
+model SubjectProgress {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planCareerId String
+  planCareer   PlanCareer @relation(fields: [planCareerId], references: [id], onDelete: Cascade)
+  subject      String
+  currentGrade String?
+  targetGrade  String?
+  updatedAt    DateTime   @updatedAt
+}
+
+model QualificationProgress {
+  id           String              @id @default(cuid())
+  userId       String
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planCareerId String
+  planCareer   PlanCareer          @relation(fields: [planCareerId], references: [id], onDelete: Cascade)
+  title        String
+  status       QualificationStatus @default(NOT_STARTED)
+  updatedAt    DateTime            @updatedAt
+}
+
+enum QualificationStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum UserRole {
+  STUDENT
+  SCHOOL_ADMIN
+}
+
+enum SchoolTier {
+  FREE
+  PREMIUM
+}
