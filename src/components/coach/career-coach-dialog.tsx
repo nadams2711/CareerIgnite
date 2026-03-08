@@ -159,7 +159,7 @@ export function CareerCoachDialog({
                     key={q}
                     variant="outline"
                     size="sm"
-                    className="text-xs"
+                    className="text-xs text-card-foreground border-border hover:bg-muted"
                     onClick={() => sendMessage(q)}
                   >
                     {q}
@@ -210,7 +210,7 @@ export function CareerCoachDialog({
             onChange={(e) => setInput(e.target.value)}
             placeholder={`Ask about ${careerTitle}...`}
             disabled={loading}
-            className="flex-1"
+            className="flex-1 bg-card text-card-foreground border-border"
           />
           <Button
             type="submit"
