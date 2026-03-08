@@ -4,6 +4,7 @@ import { prisma } from "./prisma";
 import authConfig from "./auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   pages: {
@@ -14,7 +15,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user) {
         token.id = user.id as string;
       }
-      // Refresh role data on sign-in or when session is updated
       if (user || trigger === "update") {
         const dbUser = await prisma.user.findUnique({
           where: { id: token.id as string },
@@ -42,5 +42,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-  ...authConfig,
 });
