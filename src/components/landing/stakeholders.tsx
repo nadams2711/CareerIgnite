@@ -29,8 +29,7 @@ export function Stakeholders() {
               and how your school compares. Data-driven career counselling.
             </p>
             <Button
-              variant="outline"
-              className="gap-2 rounded-xl text-card-foreground border-border hover:bg-muted"
+              className="gap-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
               onClick={() => signIn("google", { callbackUrl: "/school/register" })}
             >
               Register Your School
@@ -48,13 +47,13 @@ export function Stakeholders() {
               plan, track progress, and understand where they&apos;re headed.
             </p>
             <div className="flex flex-wrap gap-2">
-              <Button asChild variant="outline" className="gap-2 rounded-xl text-card-foreground border-border hover:bg-muted">
+              <Button asChild className="gap-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700">
                 <Link href="/parent/invite">
                   <KeyRound className="h-4 w-4" />
                   I Have a Code
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="gap-2 rounded-xl text-card-foreground border-border hover:bg-muted">
+              <Button asChild className="gap-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700">
                 <Link href="/parent/dashboard">
                   Parent Login
                   <ArrowRight className="h-4 w-4" />
