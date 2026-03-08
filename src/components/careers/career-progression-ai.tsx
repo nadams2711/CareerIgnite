@@ -38,7 +38,7 @@ export function CareerProgressionAI({ careerTitle }: CareerProgressionAIProps) {
         </h2>
         <div className="flex items-center justify-center gap-2 py-8">
           <Loader2 className="h-5 w-5 text-blue-500 animate-spin" />
-          <span className="text-sm text-muted-foreground">Mapping your career path...</span>
+          <span className="text-sm text-card-foreground/70">Mapping your career path...</span>
         </div>
       </div>
     );
@@ -52,7 +52,7 @@ export function CareerProgressionAI({ careerTitle }: CareerProgressionAIProps) {
         <TrendingUp className="h-5 w-5" />
         Where This Takes You
       </h2>
-      <p className="text-sm text-muted-foreground mb-6">
+      <p className="text-sm text-card-foreground/70 mb-6">
         Your career journey from day one to the top
       </p>
 
@@ -73,17 +73,17 @@ export function CareerProgressionAI({ careerTitle }: CareerProgressionAIProps) {
                 </div>
 
                 {/* Content card */}
-                <div className="flex-1 rounded-xl border-2 border-border bg-background p-4 transition-all hover:shadow-md">
+                <div className="flex-1 rounded-xl border-2 border-border bg-card p-4 transition-all hover:shadow-md">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
-                    <h4 className="font-bold text-foreground">{step.level}</h4>
+                    <h4 className="font-bold text-card-foreground">{step.level}</h4>
                     <span className="text-lg font-bold gradient-text">{step.salary}</span>
                   </div>
                   <div className="flex items-center gap-2 mb-1.5">
-                    <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
+                    <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-card-foreground/70">
                       {step.years}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground">{step.description}</p>
+                  <p className="text-sm text-card-foreground/70">{step.description}</p>
                 </div>
               </div>
             );

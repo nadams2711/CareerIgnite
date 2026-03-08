@@ -137,9 +137,9 @@ export default async function CareerDetailPage({
       </div>
 
       {/* AI Coach CTA */}
-      <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 p-8 text-center shadow-sm">
-        <h2 className="text-xl font-bold mb-2">Still got questions?</h2>
-        <p className="text-muted-foreground mb-4">Chat with the AI Coach about this career</p>
+      <div className="rounded-2xl bg-card border-2 border-border p-8 text-center shadow-md">
+        <h2 className="text-xl font-bold text-card-foreground mb-2">Still got questions?</h2>
+        <p className="text-card-foreground/70 mb-4">Chat with the AI Coach about this career</p>
         <CareerCoachDialog
           careerTitle={career.title}
           careerSlug={career.slug}

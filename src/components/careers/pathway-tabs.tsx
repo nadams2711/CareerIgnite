@@ -57,9 +57,9 @@ export function PathwayTabs({ pathways, defaultState }: PathwayTabsProps) {
         </div>
       ) : (
         <Tabs defaultValue={availableTypes[0]} className="w-full">
-          <TabsList className="mb-4 flex-wrap h-auto gap-1">
+          <TabsList className="mb-4 flex-wrap h-auto gap-1 bg-muted">
             {availableTypes.map((type) => (
-              <TabsTrigger key={type} value={type} className="text-sm">
+              <TabsTrigger key={type} value={type} className="text-sm data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                 {PATHWAY_TYPES[type]?.label || type}
               </TabsTrigger>
             ))}
