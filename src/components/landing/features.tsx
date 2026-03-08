@@ -33,7 +33,7 @@ const features = [
 
 export function Features() {
   return (
-    <section className="py-16 sm:py-24 mesh-gradient">
+    <section className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-white">

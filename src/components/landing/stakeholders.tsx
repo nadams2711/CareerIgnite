@@ -7,7 +7,7 @@ import { School, Heart, ArrowRight, KeyRound } from "lucide-react";
 
 export function Stakeholders() {
   return (
-    <section className="py-16 bg-muted/50">
+    <section className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight text-white">
@@ -30,7 +30,7 @@ export function Stakeholders() {
             </p>
             <Button
               variant="outline"
-              className="gap-2 rounded-xl"
+              className="gap-2 rounded-xl text-card-foreground border-border hover:bg-muted"
               onClick={() => signIn("google", { callbackUrl: "/school/register" })}
             >
               Register Your School
@@ -48,13 +48,13 @@ export function Stakeholders() {
               plan, track progress, and understand where they&apos;re headed.
             </p>
             <div className="flex flex-wrap gap-2">
-              <Button asChild variant="outline" className="gap-2 rounded-xl">
+              <Button asChild variant="outline" className="gap-2 rounded-xl text-card-foreground border-border hover:bg-muted">
                 <Link href="/parent/invite">
                   <KeyRound className="h-4 w-4" />
                   I Have a Code
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="gap-2 rounded-xl">
+              <Button asChild variant="outline" className="gap-2 rounded-xl text-card-foreground border-border hover:bg-muted">
                 <Link href="/parent/dashboard">
                   Parent Login
                   <ArrowRight className="h-4 w-4" />
