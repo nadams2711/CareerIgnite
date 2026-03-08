@@ -72,7 +72,7 @@ export function SubjectResources({ subjects, targetGrade }: SubjectResourcesProp
           size="sm"
           onClick={handleFetch}
           disabled={loading || subjects.length === 0}
-          className="gap-2 rounded-xl"
+          className="gap-2 rounded-xl text-card-foreground border-border"
         >
           {loading ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
