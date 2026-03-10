@@ -203,22 +203,8 @@ export function RiasecResults() {
         </h3>
         <div className="flex flex-col gap-3">
           {visibleCareers.map((career, index) => (
-            <div key={career.id} className="relative">
+            <div key={career.id}>
               <ParentCareerCard career={career} rank={index + 1} />
-              {/* Match score badge */}
-              <div className="absolute top-3 right-3 z-30">
-                <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${
-                    career.matchScore >= 80
-                      ? 'bg-gradient-to-r from-green-500 to-emerald-500'
-                      : career.matchScore >= 60
-                      ? 'bg-gradient-to-r from-blue-500 to-cyan-500'
-                      : 'bg-gradient-to-r from-orange-500 to-amber-500'
-                  }`}
-                >
-                  {career.matchScore}% match
-                </span>
-              </div>
               {career.matchExplanation && (
                 <p className="text-xs text-white/60 mt-1 ml-12 mb-1">
                   {career.matchExplanation}
