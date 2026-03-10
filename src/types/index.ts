@@ -33,6 +33,39 @@ export type QuizResults = {
   vibeLabel: string;
 };
 
+// RIASEC types
+export type RiasecType = 'R' | 'I' | 'A' | 'S' | 'E' | 'C';
+
+export type RiasecSwipeAnswer = {
+  scenarioId: number;
+  liked: boolean;
+  riasecType: RiasecType;
+};
+
+export type RiasecProfile = Record<RiasecType, number>;
+
+export type RiasecMatchBreakdown = {
+  riasecCongruence: number;
+  skillFit: number;
+  valuesFit: number;
+};
+
+export type RiasecMatchedCareer = CareerWithPathways & {
+  matchScore: number;
+  matchBreakdown: RiasecMatchBreakdown;
+  matchExplanation: string;
+};
+
+export type RiasecQuizResults = {
+  topCategories: CareerCategory[];
+  matchedCareers: RiasecMatchedCareer[];
+  categoryScores: Record<string, number>;
+  vibeLabel: string;
+  riasecProfile: RiasecProfile;
+  riasecCode: string;
+  riasecLabel: string;
+};
+
 // Legacy quiz types (kept for compatibility)
 export type QuizAnswer = {
   questionId: number;

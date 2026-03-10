@@ -130,9 +130,8 @@ export function ParentCoachCard({
                 {suggestedQuestions.map((q) => (
                   <Button
                     key={q}
-                    variant="outline"
                     size="sm"
-                    className="text-xs"
+                    className="text-xs bg-blue-600 hover:bg-blue-700 text-white"
                     onClick={() => sendMessage(q)}
                   >
                     {q}
@@ -156,7 +155,7 @@ export function ParentCoachCard({
                 className={`rounded-lg px-3 py-2 text-sm max-w-[80%] whitespace-pre-wrap ${
                   msg.role === "user"
                     ? "bg-blue-600 text-white"
-                    : "bg-muted"
+                    : "bg-muted text-card-foreground"
                 }`}
               >
                 {msg.content || (loading && i === messages.length - 1 && (
@@ -177,13 +176,13 @@ export function ParentCoachCard({
         )}
 
         {/* Input */}
-        <form onSubmit={handleSubmit} className="flex gap-2 pt-2 border-t">
+        <form onSubmit={handleSubmit} className="flex gap-2 pt-2 border-t border-border">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about your child's career path..."
             disabled={loading}
-            className="flex-1"
+            className="flex-1 bg-muted text-card-foreground border-border placeholder:text-muted-foreground"
           />
           <Button
             type="submit"

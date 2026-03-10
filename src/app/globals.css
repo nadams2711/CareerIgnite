@@ -126,6 +126,9 @@
     background: linear-gradient(to bottom, oklch(0.28 0.07 250), oklch(0.18 0.05 240));
     min-height: 100vh;
   }
+  .bg-card, .bg-popover {
+    color: var(--card-foreground);
+  }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
   }

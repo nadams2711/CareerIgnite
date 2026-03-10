@@ -10,13 +10,24 @@ interface PremiumGateProps {
 }
 
 export function PremiumGate({ children, isPremium, title }: PremiumGateProps) {
-  if (isPremium) return <>{children}</>;
+  if (isPremium) {
+    return (
+      <div className="rounded-2xl border-2 border-border bg-card shadow-md overflow-hidden">
+        {title && (
+          <div className="px-5 pt-4 pb-2">
+            <h3 className="font-heading text-sm font-semibold text-card-foreground">{title}</h3>
+          </div>
+        )}
+        <div className="p-5">{children}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative rounded-2xl border-2 border-border bg-card shadow-md overflow-hidden">
       {title && (
         <div className="px-5 pt-4 pb-2">
-          <h3 className="font-heading text-sm font-semibold text-muted-foreground">{title}</h3>
+          <h3 className="font-heading text-sm font-semibold text-card-foreground">{title}</h3>
         </div>
       )}
       <div className="pointer-events-none select-none blur-[6px] opacity-60 p-5">

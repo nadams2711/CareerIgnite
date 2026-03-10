@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useQuizStore } from "@/stores/quiz-store";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, RotateCcw, Target, Sparkles, Brain } from "lucide-react";
+import { ArrowRight, RotateCcw, Target, Sparkles } from "lucide-react";
 import { SkillsAssessment } from "./skills-assessment";
-import { DeepQuiz } from "./deep-quiz";
 import { ResultsSummary } from "./results-summary";
 import { ParentCareerCard } from "@/components/parent/parent-career-card";
 import type { QuizResults as QuizResultsType } from "@/types";
@@ -80,25 +79,6 @@ export function QuizResults() {
           </div>
         </div>
         <SkillsAssessment
-          categoryScores={results.categoryScores}
-          onRefine={handleRefine}
-        />
-      </div>
-
-      {/* ── Step 4: Deep Dive Quiz ── */}
-      <div className="mb-10">
-        <div className="flex items-center gap-2 mb-4">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500">
-            <Brain className="h-4 w-4 text-white" />
-          </div>
-          <div>
-            <h3 className="font-bold text-sm text-white">Go deeper</h3>
-            <p className="text-xs text-white/60">
-              15 questions about your interests, work style, and personality for the most accurate results.
-            </p>
-          </div>
-        </div>
-        <DeepQuiz
           categoryScores={results.categoryScores}
           onRefine={handleRefine}
         />

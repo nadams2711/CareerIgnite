@@ -118,7 +118,7 @@ const expandedCareers: ExpandedCareer[] = [
     title: 'Musician / Music Producer',
     slug: 'musician-music-producer',
     description: 'Create, perform, and produce music across genres from pop to classical. Work in studios, perform live, or produce tracks for artists, films, and games. Blend creativity with technical audio engineering skills.',
-    image: '/images/careers/musician-music-producer.png',
+    image: '/images/careers/musician.png',
     dayInLife: 'Your day might start in a recording studio mixing vocals for an upcoming artist, tweaking EQ levels and layering harmonies until the track sounds perfect. After lunch, you rehearse with your band for an upcoming gig, running through setlists and perfecting your performance. In the evening, you compose a new beat on your laptop, experimenting with synths and samples until inspiration strikes.',
     progression: [
       { level: 'Session Musician / Junior Producer', years: '0-3 years', salary: '$45K-$60K', description: 'Play backup for artists, work on small production projects, build your portfolio and industry connections', color: '#22c55e' },
@@ -189,7 +189,7 @@ const expandedCareers: ExpandedCareer[] = [
     title: 'Animator / 3D Artist',
     slug: 'animator-3d-artist',
     description: 'Bring characters and worlds to life through animation and 3D modeling. Work on films, TV shows, video games, and advertising, creating everything from realistic visual effects to stylized cartoon characters.',
-    image: '/images/careers/animator-3d-artist.png',
+    image: '/images/careers/animator.png',
     dayInLife: 'You start by reviewing feedback on yesterday\'s animation reel, adjusting a character\'s walk cycle to make it feel more natural and expressive. Mid-morning, you sculpt a new creature design in ZBrush, adding intricate details to scales and textures. After lunch, you attend a team meeting to discuss the art direction for an upcoming game level, then spend the afternoon rigging a character model so animators can pose it easily.',
     progression: [
       { level: 'Junior Animator / 3D Artist', years: '0-2 years', salary: '$50K-$65K', description: 'Work on simple animations, assist senior artists, learn industry-standard software and pipelines', color: '#22c55e' },
@@ -1056,7 +1056,7 @@ const expandedCareers: ExpandedCareer[] = [
     title: 'Real Estate Agent',
     slug: 'real-estate-agent',
     description: 'Help people buy, sell, and rent properties by marketing homes, conducting inspections, negotiating deals, and guiding clients through one of the biggest financial decisions of their lives. Build a portfolio of listings and earn commission on successful sales.',
-    image: '/images/careers/real-estate-agent.png',
+    image: '/images/careers/realestate-agent.png',
     dayInLife: 'Your morning starts with a property appraisal, walking through a client\'s home and advising on market value and presentation. You rush to set up an open house, ensuring the property looks perfect and greeting prospective buyers with enthusiasm. The afternoon involves negotiating between a buyer and seller to close a deal, followed by social media marketing for new listings and networking at a local business event.',
     progression: [
       { level: 'Sales Assistant / Trainee Agent', years: '0-2 years', salary: '$40K-$55K', description: 'Support senior agents, learn property law, complete licensing, attend opens, build local knowledge', color: '#22c55e' },
@@ -1458,7 +1458,7 @@ const expandedCareers: ExpandedCareer[] = [
     title: 'Mechanic (Automotive)',
     slug: 'automotive-mechanic',
     description: 'Diagnose, repair, and maintain vehicles from everyday cars to high-performance machines. Use technical knowledge and hands-on skills to keep Australia\'s vehicles running safely and efficiently, working in workshops, dealerships, or running your own garage.',
-    image: '/images/careers/automotive-mechanic.png',
+    image: '/images/careers/mechanic.png',
     dayInLife: 'Your morning begins diagnosing a check engine light on a customer\'s sedan, hooking up diagnostic equipment and tracing the issue to a faulty oxygen sensor. You perform a major service on a 4WD, changing oil, rotating tires, and checking brake pads for wear. In the afternoon, you tackle a more complex job - replacing a timing belt on a European car, carefully following torque specifications and ensuring everything is perfectly aligned.',
     progression: [
       { level: 'Apprentice Mechanic', years: '0-4 years', salary: '$35K-$50K', description: 'Learn fundamentals, assist qualified mechanics, study at TAFE, complete Certificate III', color: '#22c55e' },

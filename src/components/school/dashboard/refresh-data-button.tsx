@@ -32,13 +32,13 @@ export function RefreshDataButton({ schoolCode }: { schoolCode: string }) {
         size="sm"
         onClick={handleRefresh}
         disabled={loading}
-        className="rounded-xl gap-2"
+        className="rounded-xl gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white"
       >
         <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
         {loading ? "Refreshing..." : "Refresh Data"}
       </Button>
       {message && (
-        <span className="text-xs text-muted-foreground">{message}</span>
+        <span className="text-xs text-white/60">{message}</span>
       )}
     </div>
   );

@@ -46,22 +46,22 @@ export function SchoolDashboardClient({ data }: Props) {
             <h1 className="font-heading text-2xl font-bold gradient-text">
               {data.school.name}
             </h1>
-            <Badge variant="outline" className="rounded-full text-xs">
+            <Badge variant="outline" className="rounded-full text-xs border-white/30 text-white">
               {data.school.tier === "PREMIUM" ? "Premium" : "Free"}
             </Badge>
           </div>
-          <p className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
+          <p className="flex items-center gap-1 text-sm text-white/70 mt-1">
             <MapPin className="h-3.5 w-3.5" />
             {data.school.suburb}, {data.school.state}
             {data.school.adminName && <> &middot; Admin: {data.school.adminName}</>}
           </p>
           {!isPremium && trialDaysLeft <= 0 && (
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-white/60 mt-1">
               Free tier — upgrade for full analytics
             </p>
           )}
           {isPremium && data.school.tier !== "PREMIUM" && trialDaysLeft > 0 && (
-            <p className="text-xs text-blue-500 mt-1">
+            <p className="text-xs text-blue-400 mt-1">
               Trial: {trialDaysLeft} day{trialDaysLeft !== 1 ? "s" : ""} remaining
             </p>
           )}
@@ -82,7 +82,7 @@ export function SchoolDashboardClient({ data }: Props) {
       {/* Free Tier: Top 3 Interests */}
       {data.topInterests.length > 0 && (
         <div className="rounded-2xl border-2 border-border bg-card p-5 shadow-md">
-          <h3 className="font-heading text-sm font-semibold text-muted-foreground mb-3">
+          <h3 className="font-heading text-sm font-semibold mb-3">
             Top Interest Areas
           </h3>
           <div className="space-y-2">

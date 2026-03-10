@@ -50,7 +50,9 @@ model User {
   state         AustralianState?
   grade         String?
   interests     String[]
-  skillRatings  Json?
+  skillRatings      Json?
+  riasecProfile     Json?            // {"R": 3, "I": 5, "A": 2, "S": 4, "E": 1, "C": 2}
+  workValueRatings  Json?            // {"achievement": 4, "independence": 3, ...}
   sharePeers    Boolean          @default(false)
   schoolId      String?
   school        School?          @relation(fields: [schoolId], references: [id])
@@ -111,7 +113,10 @@ model Career {
   dayInLife   String?
   progression Json?
   impact      String?
-  challenges  Json?
+  challenges    Json?
+  riasecCode    String?          // e.g. "IC", "SA", "RE"
+  skillWeights  Json?            // {"math": 0.8, "tech": 1.0, "creative": 0.4, ...}
+  workValues    Json?            // {"achievement": 0.7, "independence": 0.5, ...}
   salaryLow   Int
   salaryHigh  Int
   growthRate  Float

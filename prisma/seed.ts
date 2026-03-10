@@ -801,7 +801,11 @@ async function main() {
   const { seedExpandedCareers } = await import('./seed-careers-expanded');
   await seedExpandedCareers();
 
-  // ---- Step 4: Summary ----
+  // ---- Step 4: RIASEC data ----
+  const { seedRiasecData } = await import('./seed-riasec');
+  await seedRiasecData();
+
+  // ---- Step 5: Summary ----
   const careerCount = await prisma.career.count();
   const pathwayCount = await prisma.statePathway.count();
   console.log(`\nSeed complete!`);

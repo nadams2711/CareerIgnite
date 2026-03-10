@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useQuizStore } from "@/stores/quiz-store";
 import { DEEP_QUIZ_QUESTIONS } from "@/lib/constants";
-import { combineQuizResults } from "@/lib/actions/quiz.actions";
+import { refineRiasecResults } from "@/lib/actions/quiz.actions";
 import {
   ChevronDown,
   ChevronUp,
@@ -15,16 +15,17 @@ import {
   Check,
   RotateCcw,
 } from "lucide-react";
-import type { QuizResults } from "@/types";
+import type { RiasecQuizResults } from "@/types";
 
 interface DeepQuizProps {
-  categoryScores: Record<string, number>;
-  onRefine: (newResults: QuizResults) => void;
+  onRefine: (newResults: RiasecQuizResults) => void;
 }
 
-export function DeepQuiz({ categoryScores, onRefine }: DeepQuizProps) {
+export function DeepQuiz({ onRefine }: DeepQuizProps) {
   const savedAnswers = useQuizStore((s) => s.deepQuizAnswers);
   const savedSkillRatings = useQuizStore((s) => s.skillRatings);
+  const savedWorkValueRatings = useQuizStore((s) => s.workValueRatings);
+  const riasecProfile = useQuizStore((s) => s.riasecProfile);
   const setDeepQuizAnswers = useQuizStore((s) => s.setDeepQuizAnswers);
   const hasCompleted = Object.keys(savedAnswers).length === DEEP_QUIZ_QUESTIONS.length;
 
@@ -55,6 +56,7 @@ export function DeepQuiz({ categoryScores, onRefine }: DeepQuizProps) {
   const currentSection = question?.section;
 
   const handleSubmit = async () => {
+    if (!riasecProfile) return;
     setSubmitting(true);
     try {
       const detailedAnswers = Object.entries(answers).map(([qId, opts]) => ({
@@ -62,7 +64,12 @@ export function DeepQuiz({ categoryScores, onRefine }: DeepQuizProps) {
         selectedOptions: opts,
       }));
       setDeepQuizAnswers(answers);
-      const refined = await combineQuizResults(categoryScores, detailedAnswers, savedSkillRatings);
+      const refined = await refineRiasecResults(
+        riasecProfile,
+        detailedAnswers,
+        savedSkillRatings,
+        savedWorkValueRatings
+      );
       onRefine(refined);
       setExpanded(false);
     } catch {

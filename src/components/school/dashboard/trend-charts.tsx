@@ -38,6 +38,7 @@ export function TrendCharts({ trends }: TrendChartsProps) {
           <Tooltip
             contentStyle={{
               backgroundColor: "var(--color-card)",
+              color: "var(--card-foreground)",
               border: "1px solid var(--color-border)",
               borderRadius: "8px",
             }}

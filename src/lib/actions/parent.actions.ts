@@ -70,11 +70,25 @@ export async function claimParentInvite(token: string, parentEmail: string, pare
       data: { email: parentEmail, name: parentName },
     });
   } else {
-    // Delete placeholder parent and reassign link
-    await prisma.parentChild.update({
-      where: { id: link.id },
-      data: { parentId: parent.id, accepted: true },
+    // Parent already exists — check if already linked to this child
+    const existingLink = await prisma.parentChild.findUnique({
+      where: { parentId_childId: { parentId: parent.id, childId: link.childId } },
     });
+
+    if (existingLink) {
+      // Already linked — just mark existing link as accepted and remove the invite link
+      await prisma.parentChild.update({
+        where: { id: existingLink.id },
+        data: { accepted: true },
+      });
+      await prisma.parentChild.delete({ where: { id: link.id } }).catch(() => {});
+    } else {
+      // Reassign the invite link to the real parent
+      await prisma.parentChild.update({
+        where: { id: link.id },
+        data: { parentId: parent.id, accepted: true },
+      });
+    }
     await prisma.parent.delete({ where: { id: link.parentId } }).catch(() => {});
     return { childName: link.child.name, parentName: parent.name };
   }

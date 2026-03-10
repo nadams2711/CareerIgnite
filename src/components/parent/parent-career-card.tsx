@@ -20,12 +20,14 @@ type ParentCareerCardProps = {
     salaryHigh: number;
     growthRate: number;
     challenges?: unknown;
+    matchScore?: number;
   };
   rank: number;
   popularity?: number;
+  matchScore?: number;
 };
 
-export function ParentCareerCard({ career, rank, popularity }: ParentCareerCardProps) {
+export function ParentCareerCard({ career, rank, popularity, matchScore }: ParentCareerCardProps) {
   const catInfo = CAREER_CATEGORIES[career.category];
   const challengesData = career.challenges as { pros?: string[] } | null;
   const prosCount = challengesData?.pros?.length || 0;
@@ -38,13 +40,13 @@ export function ParentCareerCard({ career, rank, popularity }: ParentCareerCardP
       <div className="group relative rounded-2xl border-2 border-border bg-card shadow-md transition-all hover:scale-[1.01] hover:shadow-lg cursor-pointer overflow-hidden">
         {/* Background image — positioned inward so white bg blends with the card */}
         {showImage && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 w-28 h-28 sm:w-32 sm:h-32 pointer-events-none">
+          <div className="absolute right-4 top-2 bottom-2 w-24 sm:w-28 pointer-events-none">
             <Image
               src={career.image!}
               alt=""
               fill
               className="object-contain opacity-70 group-hover:opacity-85 transition-opacity"
-              sizes="128px"
+              sizes="112px"
               onError={() => setImgError(true)}
             />
           </div>
@@ -65,7 +67,20 @@ export function ParentCareerCard({ career, rank, popularity }: ParentCareerCardP
               >
                 {catInfo.label}
               </Badge>
-              {prosCount > 0 && (
+              {(matchScore ?? career.matchScore) !== undefined && (
+                <span
+                  className={`text-xs font-bold px-2 py-0.5 rounded-full text-white ${
+                    (matchScore ?? career.matchScore)! >= 80
+                      ? 'bg-gradient-to-r from-green-500 to-emerald-500'
+                      : (matchScore ?? career.matchScore)! >= 60
+                      ? 'bg-gradient-to-r from-blue-500 to-cyan-500'
+                      : 'bg-gradient-to-r from-orange-500 to-amber-500'
+                  }`}
+                >
+                  {matchScore ?? career.matchScore}% match
+                </span>
+              )}
+              {prosCount > 0 && !(matchScore ?? career.matchScore) && (
                 <span className="text-xs text-muted-foreground">{prosCount} pros</span>
               )}
             </div>

@@ -26,6 +26,8 @@ export async function updateUserProfile(data: {
   grade?: string;
   interests?: string[];
   skillRatings?: Record<string, number>;
+  riasecProfile?: Record<string, number>;
+  workValueRatings?: Record<string, number>;
 }) {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthorized");
@@ -37,6 +39,8 @@ export async function updateUserProfile(data: {
       interests: data.interests,
       ...(data.grade !== undefined && { grade: data.grade }),
       ...(data.skillRatings !== undefined && { skillRatings: data.skillRatings }),
+      ...(data.riasecProfile !== undefined && { riasecProfile: data.riasecProfile }),
+      ...(data.workValueRatings !== undefined && { workValueRatings: data.workValueRatings }),
     },
   });
 

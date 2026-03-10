@@ -32,7 +32,7 @@ const CATEGORY_ICONS: Record<CareerCategory, React.ComponentType<{ className?: s
   SERVICES: UtensilsCrossed,
 };
 
-export function CareerCard({ career }: { career: CareerWithPathways }) {
+export function CareerCard({ career, matchScore }: { career: CareerWithPathways; matchScore?: number }) {
   const categoryInfo = CAREER_CATEGORIES[career.category];
   const IconComponent = CATEGORY_ICONS[career.category];
   const [imgError, setImgError] = useState(false);
@@ -63,6 +63,19 @@ export function CareerCard({ career }: { career: CareerWithPathways }) {
             <IconComponent className="h-3 w-3" />
             {categoryInfo.label}
           </Badge>
+          {matchScore !== undefined && (
+            <Badge
+              className={`absolute top-2 right-2 text-[10px] font-bold text-white border-0 ${
+                matchScore >= 80
+                  ? 'bg-gradient-to-r from-green-500 to-emerald-500'
+                  : matchScore >= 60
+                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500'
+                  : 'bg-gradient-to-r from-orange-500 to-amber-500'
+              }`}
+            >
+              {matchScore}% match
+            </Badge>
+          )}
         </div>
 
         {/* Content */}

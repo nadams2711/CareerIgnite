@@ -179,7 +179,7 @@ export default function ParentDashboardPage() {
   // ─── Email Entry Screen ───
   if (!submitted && !loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-4 bg-[oklch(0.935_0.01_240)]">
+      <div className="flex min-h-screen items-center justify-center px-4 bg-background">
         <Card className="w-full max-w-md border-2">
           <CardHeader className="text-center">
             <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-teal-500">
@@ -188,7 +188,7 @@ export default function ParentDashboardPage() {
             <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
               Parent Dashboard
             </CardTitle>
-            <p className="text-sm text-[oklch(0.42_0.01_240)] mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               Enter your email to view your child&apos;s career progress.
             </p>
           </CardHeader>
@@ -216,10 +216,10 @@ export default function ParentDashboardPage() {
   // ─── Loading Screen ───
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-4 bg-[oklch(0.935_0.01_240)]">
+      <div className="flex min-h-screen items-center justify-center px-4 bg-background">
         <div className="text-center space-y-3">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-          <p className="text-sm text-[oklch(0.42_0.01_240)]">Loading dashboard...</p>
+          <p className="text-sm text-muted-foreground">Loading dashboard...</p>
         </div>
       </div>
     );
@@ -228,12 +228,12 @@ export default function ParentDashboardPage() {
   // ─── No Data Screen ───
   if (!parentData || parentData.children.length === 0) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-4 bg-[oklch(0.935_0.01_240)]">
+      <div className="flex min-h-screen items-center justify-center px-4 bg-background">
         <Card className="w-full max-w-md text-center border-2">
           <CardContent className="p-8">
-            <Heart className="h-12 w-12 text-[oklch(0.42_0.01_240)] mx-auto mb-4" />
+            <Heart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
             <h2 className="text-xl font-bold mb-2">No connections found</h2>
-            <p className="text-[oklch(0.42_0.01_240)] mb-4">
+            <p className="text-muted-foreground mb-4">
               Ask your child to send you an invite link from their CareerIgnite dashboard.
             </p>
             <Button variant="outline" onClick={() => { setSubmitted(false); setEmail(""); }}>
@@ -255,7 +255,7 @@ export default function ParentDashboardPage() {
   const progress = [hasState, hasQuiz, hasPlan].filter(Boolean).length;
 
   return (
-    <div className="min-h-screen bg-[oklch(0.935_0.01_240)]">
+    <div className="min-h-screen bg-background">
       {/* ─── Gradient Header ─── */}
       <header className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 text-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30" />
@@ -295,7 +295,7 @@ export default function ParentDashboardPage() {
                 className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all whitespace-nowrap border-2 ${
                   activeChild === i
                     ? "bg-gradient-to-r from-blue-600 to-teal-500 text-white border-transparent shadow-md"
-                    : "bg-[oklch(0.995_0.002_240)] border-[oklch(0.85_0.01_240)] text-foreground hover:border-blue-300"
+                    : "bg-card border-border text-foreground hover:border-blue-300"
                 }`}
               >
                 <GraduationCap className="h-4 w-4" />
@@ -309,7 +309,7 @@ export default function ParentDashboardPage() {
           {/* ════════ Left Column (2/3) ════════ */}
           <div className="lg:col-span-2 space-y-6">
             {/* ─── Section A: Child Overview ─── */}
-            <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+            <Card className="border-2 border-border bg-card shadow-md">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4 mb-5">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500">
@@ -319,15 +319,15 @@ export default function ParentDashboardPage() {
                     <h2 className="text-xl font-bold font-[family-name:var(--font-space-grotesk)]">
                       {child.name || "Student"}
                     </h2>
-                    <div className="flex flex-wrap items-center gap-2 text-sm text-[oklch(0.42_0.01_240)] mt-0.5">
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mt-0.5">
                       {child.state && (
-                        <Badge variant="outline" className="border-[oklch(0.85_0.01_240)]">
+                        <Badge variant="outline" className="border-border">
                           <MapPin className="h-3 w-3 mr-1" />
                           {child.state}
                         </Badge>
                       )}
                       {child.grade && (
-                        <Badge variant="outline" className="border-[oklch(0.85_0.01_240)]">
+                        <Badge variant="outline" className="border-border">
                           {child.grade}
                         </Badge>
                       )}
@@ -344,7 +344,7 @@ export default function ParentDashboardPage() {
                 <div className="mb-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">Journey Progress</span>
-                    <span className="text-sm text-[oklch(0.42_0.01_240)]">{progress}/3</span>
+                    <span className="text-sm text-muted-foreground">{progress}/3</span>
                   </div>
                   <Progress value={(progress / 3) * 100} className="h-2" />
                 </div>
@@ -358,9 +358,9 @@ export default function ParentDashboardPage() {
                       {step.done ? (
                         <CheckCircle className="h-4 w-4 text-emerald-500" />
                       ) : (
-                        <Circle className="h-4 w-4 text-[oklch(0.42_0.01_240)]" />
+                        <Circle className="h-4 w-4 text-muted-foreground" />
                       )}
-                      <span className={step.done ? "text-foreground" : "text-[oklch(0.42_0.01_240)]"}>
+                      <span className={step.done ? "text-foreground" : "text-muted-foreground"}>
                         {step.label}
                       </span>
                     </span>
@@ -371,13 +371,13 @@ export default function ParentDashboardPage() {
 
             {/* ─── Section B: Quiz Results / Interests ─── */}
             {hasQuiz && (
-              <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+              <Card className="border-2 border-border bg-card shadow-md">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                     <Star className="h-5 w-5 text-blue-600" />
                     Quiz Results &mdash; What We Learned About {child.name || "Your Child"}
                   </CardTitle>
-                  <p className="text-sm text-[oklch(0.42_0.01_240)]">
+                  <p className="text-sm text-muted-foreground">
                     Based on their career quiz responses, here&apos;s what stands out.
                   </p>
                 </CardHeader>
@@ -408,7 +408,7 @@ export default function ParentDashboardPage() {
                       const insight = CATEGORY_PARENT_INSIGHTS[interest];
                       if (!catInfo || !insight) return null;
                       return (
-                        <div key={interest} className="rounded-xl border border-[oklch(0.85_0.01_240)] bg-[oklch(0.935_0.01_240)] p-4">
+                        <div key={interest} className="rounded-xl border border-border bg-muted p-4">
                           <div className="flex items-center gap-2 mb-2">
                             <div className={`h-2.5 w-2.5 rounded-full bg-gradient-to-r ${catInfo.gradient}`} />
                             <span className={`text-sm font-bold ${catInfo.textColor}`}>
@@ -418,7 +418,7 @@ export default function ParentDashboardPage() {
                           <p className="text-sm text-foreground leading-relaxed">
                             {insight.trait}
                           </p>
-                          <p className="text-sm text-[oklch(0.42_0.01_240)] leading-relaxed mt-1">
+                          <p className="text-sm text-muted-foreground leading-relaxed mt-1">
                             {insight.strength}
                           </p>
                         </div>
@@ -451,12 +451,12 @@ export default function ParentDashboardPage() {
                             return (
                               <div
                                 key={skill}
-                                className="rounded-xl border border-[oklch(0.85_0.01_240)] bg-[oklch(0.935_0.01_240)] p-3 text-center"
+                                className="rounded-xl border border-border bg-muted p-3 text-center"
                               >
                                 <div className="text-lg mb-0.5">
                                   {"\u2B50".repeat(Math.min(rating, 5))}
                                 </div>
-                                <span className="text-xs font-medium text-[oklch(0.42_0.01_240)]">
+                                <span className="text-xs font-medium text-muted-foreground">
                                   {label}
                                 </span>
                               </div>
@@ -472,13 +472,13 @@ export default function ParentDashboardPage() {
 
             {/* ─── Section C: Career Matches ─── */}
             {latestPlan ? (
-              <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+              <Card className="border-2 border-border bg-card shadow-md">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                     <GraduationCap className="h-5 w-5 text-blue-600" />
                     {latestPlan.title}
                   </CardTitle>
-                  <p className="text-sm text-[oklch(0.42_0.01_240)]">
+                  <p className="text-sm text-muted-foreground">
                     {child.name || "Your child"}&apos;s saved career plan — tap to explore each career.
                   </p>
                 </CardHeader>
@@ -496,13 +496,13 @@ export default function ParentDashboardPage() {
                 </CardContent>
               </Card>
             ) : quizCareers.length > 0 ? (
-              <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+              <Card className="border-2 border-border bg-card shadow-md">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                     <Sparkles className="h-5 w-5 text-blue-600" />
                     Quiz-Matched Careers
                   </CardTitle>
-                  <p className="text-sm text-[oklch(0.42_0.01_240)]">
+                  <p className="text-sm text-muted-foreground">
                     Based on {child.name || "your child"}&apos;s quiz results, these careers are the best fit.
                     They haven&apos;t saved a formal plan yet.
                   </p>
@@ -524,13 +524,13 @@ export default function ParentDashboardPage() {
 
             {/* ─── Section C2: Roadmap / Timeline ─── */}
             {generatedTimeline.length > 0 && (
-              <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+              <Card className="border-2 border-border bg-card shadow-md">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                     <Route className="h-5 w-5 text-blue-600" />
                     {child.name || "Your Child"}&apos;s Roadmap
                   </CardTitle>
-                  <p className="text-sm text-[oklch(0.42_0.01_240)]">
+                  <p className="text-sm text-muted-foreground">
                     {latestPlan?.timeline
                       ? "The step-by-step pathway from school to career."
                       : "A suggested pathway based on quiz results — this updates when a plan is saved."}
@@ -557,12 +557,12 @@ export default function ParentDashboardPage() {
                               {step.year}
                             </span>
                             <h4 className="font-bold mt-1">{step.title}</h4>
-                            <p className="text-sm text-[oklch(0.42_0.01_240)] mt-0.5">{step.description}</p>
+                            <p className="text-sm text-muted-foreground mt-0.5">{step.description}</p>
                             {step.details && step.details.length > 0 && (
                               <ul className="mt-2 space-y-1">
                                 {step.details.map((detail, i) => (
                                   <li key={i} className="flex items-start gap-2 text-sm">
-                                    <Circle className="h-3 w-3 mt-1 shrink-0 text-[oklch(0.42_0.01_240)]" />
+                                    <Circle className="h-3 w-3 mt-1 shrink-0 text-muted-foreground" />
                                     <span>{detail}</span>
                                   </li>
                                 ))}
@@ -587,13 +587,13 @@ export default function ParentDashboardPage() {
               const totalCount = Object.values(interests).reduce((a, b) => a + b, 0);
 
               return (
-                <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+                <Card className="border-2 border-border bg-card shadow-md">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                       <School className="h-5 w-5 text-blue-600" />
                       School Trends — {child.school.name}
                     </CardTitle>
-                    <p className="text-sm text-[oklch(0.42_0.01_240)]">
+                    <p className="text-sm text-muted-foreground">
                       What students at this school are interested in ({insight.studentCount} students)
                     </p>
                   </CardHeader>
@@ -618,13 +618,13 @@ export default function ParentDashboardPage() {
               <>
                 {/* State-wide interests */}
                 {insights.stateInterests.length > 0 && child.state && (
-                  <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+                  <Card className="border-2 border-border bg-card shadow-md">
                     <CardHeader className="pb-3">
                       <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                         <BarChart3 className="h-5 w-5 text-blue-600" />
                         {child.state} Interests
                       </CardTitle>
-                      <p className="text-xs text-[oklch(0.42_0.01_240)]">
+                      <p className="text-xs text-muted-foreground">
                         What {insights.totalStudents.toLocaleString()} students across{" "}
                         {child.state} are exploring
                       </p>
@@ -642,7 +642,7 @@ export default function ParentDashboardPage() {
                     : quizCareers.map((c: any) => ({ title: c.title, slug: c.slug }));
                   if (careerList.length === 0) return null;
                   return (
-                    <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+                    <Card className="border-2 border-border bg-card shadow-md">
                       <CardHeader className="pb-3">
                         <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                           <Users className="h-5 w-5 text-blue-600" />
@@ -661,13 +661,13 @@ export default function ParentDashboardPage() {
 
                 {/* Trending careers nationally */}
                 {insights.trendingCareers.length > 0 && (
-                  <Card className="border-2 border-[oklch(0.85_0.01_240)] bg-[oklch(0.995_0.002_240)] shadow-md">
+                  <Card className="border-2 border-border bg-card shadow-md">
                     <CardHeader className="pb-3">
                       <CardTitle className="flex items-center gap-2 text-base font-[family-name:var(--font-space-grotesk)]">
                         <Globe className="h-5 w-5 text-blue-600" />
                         Trending Nationally
                       </CardTitle>
-                      <p className="text-xs text-[oklch(0.42_0.01_240)]">
+                      <p className="text-xs text-muted-foreground">
                         Most popular careers across Australia right now
                       </p>
                     </CardHeader>
@@ -677,7 +677,7 @@ export default function ParentDashboardPage() {
                           <Link
                             key={trend.slug}
                             href={`/careers/${trend.slug}`}
-                            className="flex items-center gap-3 rounded-xl border border-[oklch(0.85_0.01_240)] bg-[oklch(0.935_0.01_240)] p-3 transition-colors hover:bg-[oklch(0.91_0.01_240)]"
+                            className="flex items-center gap-3 rounded-xl border border-border bg-muted p-3 transition-colors hover:bg-accent"
                           >
                             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-teal-500">
                               <span className="text-white font-bold text-xs">{i + 1}</span>

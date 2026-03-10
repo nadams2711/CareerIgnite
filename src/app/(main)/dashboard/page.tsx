@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth";
 import { getUserPlans } from "@/lib/actions/plan.actions";
 import { getCurrentUser } from "@/lib/actions/user.actions";
 import { getCareers } from "@/lib/actions/career.actions";
-import { refineResultsWithSkills } from "@/lib/actions/quiz.actions";
+import { refineResultsWithSkills, getRiasecQuizResults } from "@/lib/actions/quiz.actions";
 import { PlanList } from "@/components/dashboard/plan-list";
 import { ProgressCard } from "@/components/dashboard/progress-card";
 import { QuizMatches } from "@/components/dashboard/quiz-matches";
@@ -29,29 +29,46 @@ export default async function DashboardPage() {
   // Get top careers for quiz matches
   const interests = user?.interests ?? [];
   const skillRatings = (user?.skillRatings as Record<string, number> | null) ?? {};
+  const riasecProfile = user?.riasecProfile as Record<string, number> | null;
+  const workValueRatings = (user?.workValueRatings as Record<string, number> | null) ?? {};
   const hasSkills = Object.keys(skillRatings).length > 0;
+  const hasRiasec = riasecProfile !== null;
   let matchedCareers: Awaited<ReturnType<typeof getCareers>> = [];
 
-  // Try interest categories first
-  for (const interest of interests) {
-    const results = await getCareers({
-      category: interest as any,
-      sort: "growth",
-    });
-    if (results.length > 0) {
-      matchedCareers = results.slice(0, 3);
-      break;
+  // If user has RIASEC profile, use RIASEC matching
+  if (hasRiasec) {
+    // Build RiasecSwipeAnswer[] from stored profile
+    const riasecAnswers = Object.entries(riasecProfile!).flatMap(([type, count]) =>
+      Array.from({ length: count as number }, (_, i) => ({
+        scenarioId: 100 + i, // synthetic IDs
+        liked: true,
+        riasecType: type as any,
+      }))
+    );
+    const results = await getRiasecQuizResults(riasecAnswers, skillRatings, workValueRatings);
+    matchedCareers = results.matchedCareers.slice(0, 3);
+  } else {
+    // Legacy: try interest categories first
+    for (const interest of interests) {
+      const results = await getCareers({
+        category: interest as any,
+        sort: "growth",
+      });
+      if (results.length > 0) {
+        matchedCareers = results.slice(0, 3);
+        break;
+      }
+    }
+
+    // If no matches from interests but user has skill ratings, use skills to find careers
+    if (matchedCareers.length === 0 && hasSkills) {
+      const refined = await refineResultsWithSkills({}, skillRatings);
+      matchedCareers = refined.matchedCareers.slice(0, 3);
     }
   }
 
-  // If no matches from interests but user has skill ratings, use skills to find careers
-  if (matchedCareers.length === 0 && hasSkills) {
-    const refined = await refineResultsWithSkills({}, skillRatings);
-    matchedCareers = refined.matchedCareers.slice(0, 3);
-  }
-
   const hasState = !!user?.state;
-  const quizCompleted = interests.length > 0 || hasSkills;
+  const quizCompleted = interests.length > 0 || hasSkills || hasRiasec;
   const hasPlans = plans.length > 0;
   const firstName = user?.name?.split(" ")[0] || "";
 

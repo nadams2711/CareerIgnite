@@ -10,6 +10,9 @@ export default async function HomePage() {
   const session = await auth();
 
   if (session?.user) {
+    if (session.user.role === "SCHOOL_ADMIN" && session.user.adminSchoolCode) {
+      redirect(`/school/${session.user.adminSchoolCode}/dashboard`);
+    }
     redirect("/dashboard");
   }
 

@@ -34,7 +34,7 @@ export function ExportButtons({ schoolCode }: ExportButtonsProps) {
         size="sm"
         onClick={handleCSVExport}
         disabled={exporting}
-        className="rounded-xl gap-2"
+        className="rounded-xl gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white"
       >
         {exporting ? (
           <Loader2 className="h-4 w-4 animate-spin" />

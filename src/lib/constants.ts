@@ -1,4 +1,4 @@
-import type { CategoryInfo } from "@/types";
+import type { CategoryInfo, RiasecType } from "@/types";
 import type {
   AustralianState,
   CareerCategory,
@@ -400,6 +400,130 @@ export const DEEP_QUIZ_QUESTIONS: {
     ],
   },
 ];
+
+// ── RIASEC Types ──
+export const RIASEC_TYPES: Record<
+  RiasecType,
+  { label: string; teenName: string; color: string; emoji: string; teenDescription: string }
+> = {
+  R: {
+    label: "Realistic",
+    teenName: "The Builder",
+    color: "#f97316",
+    emoji: "\uD83D\uDD27",
+    teenDescription: "You like working with your hands, building things, and being physically active. You prefer doing over talking.",
+  },
+  I: {
+    label: "Investigative",
+    teenName: "The Thinker",
+    color: "#6366f1",
+    emoji: "\uD83E\uDDE0",
+    teenDescription: "You love figuring things out, asking questions, and diving deep into how stuff works. Curiosity is your superpower.",
+  },
+  A: {
+    label: "Artistic",
+    teenName: "The Creator",
+    color: "#a855f7",
+    emoji: "\uD83C\uDFA8",
+    teenDescription: "You express yourself through creativity — art, music, writing, design. You see the world differently and that's your strength.",
+  },
+  S: {
+    label: "Social",
+    teenName: "The Helper",
+    color: "#f43f5e",
+    emoji: "\u2764\uFE0F",
+    teenDescription: "You're the person everyone comes to. You love helping, teaching, and making sure people around you are okay.",
+  },
+  E: {
+    label: "Enterprising",
+    teenName: "The Leader",
+    color: "#10b981",
+    emoji: "\uD83D\uDE80",
+    teenDescription: "You take charge, pitch ideas, and make things happen. You're competitive, persuasive, and always thinking big.",
+  },
+  C: {
+    label: "Conventional",
+    teenName: "The Organiser",
+    color: "#3b82f6",
+    emoji: "\uD83D\uDCCB",
+    teenDescription: "You love order, planning, and getting things done efficiently. Spreadsheets? Checklists? Oddly satisfying.",
+  },
+};
+
+// RIASEC swipe scenarios — 18 scenarios, 3 per type
+export const RIASEC_SCENARIOS: {
+  id: number;
+  emoji: string;
+  text: string;
+  riasecType: RiasecType;
+}[] = [
+  // Realistic (The Builder)
+  { id: 1, emoji: "\uD83D\uDD27", text: "You just fixed a friend's bike and it rides perfectly", riasecType: "R" },
+  { id: 2, emoji: "\u26A1", text: "You spent the weekend building furniture from scratch", riasecType: "R" },
+  { id: 3, emoji: "\uD83C\uDF31", text: "You rigged up a speaker system for a party using spare parts", riasecType: "R" },
+
+  // Investigative (The Thinker)
+  { id: 4, emoji: "\uD83D\uDD2C", text: "You stayed up late binge-watching a documentary about space", riasecType: "I" },
+  { id: 5, emoji: "\uD83E\uDDE0", text: "You found a pattern in the data that nobody else noticed", riasecType: "I" },
+  { id: 6, emoji: "\uD83E\uDDEA", text: "You designed an experiment to figure out the best study hack", riasecType: "I" },
+
+  // Artistic (The Creator)
+  { id: 7, emoji: "\uD83C\uDFA8", text: "You spent all weekend on a digital art piece and lost track of time", riasecType: "A" },
+  { id: 8, emoji: "\uD83C\uDFB5", text: "You wrote a song and your friends keep asking to hear it", riasecType: "A" },
+  { id: 9, emoji: "\uD83C\uDFAC", text: "You filmed and edited a short video that blew up at school", riasecType: "A" },
+
+  // Social (The Helper)
+  { id: 10, emoji: "\uD83D\uDC69\u200D\uD83C\uDFEB", text: "You tutored a younger student and they finally got it", riasecType: "S" },
+  { id: 11, emoji: "\u2764\uFE0F", text: "You organised a fundraiser and the whole school got behind it", riasecType: "S" },
+  { id: 12, emoji: "\uD83E\uDE79", text: "A friend was going through it and you knew exactly what to say", riasecType: "S" },
+
+  // Enterprising (The Leader)
+  { id: 13, emoji: "\uD83D\uDCB0", text: "You started a side hustle and made your first $500", riasecType: "E" },
+  { id: 14, emoji: "\uD83C\uDFC6", text: "You captained your team to a come-from-behind win", riasecType: "E" },
+  { id: 15, emoji: "\uD83D\uDE80", text: "You pitched an idea to your teacher and convinced them to try it", riasecType: "E" },
+
+  // Conventional (The Organiser)
+  { id: 16, emoji: "\uD83D\uDCCB", text: "You made a study planner that got you through exams stress-free", riasecType: "C" },
+  { id: 17, emoji: "\uD83D\uDCCA", text: "You built a spreadsheet to track your savings \u2014 oddly satisfying", riasecType: "C" },
+  { id: 18, emoji: "\uD83D\uDCC1", text: "You reorganised the team's shared drive and everyone could finally find stuff", riasecType: "C" },
+];
+
+// Work values for RIASEC quiz
+export const WORK_VALUES: {
+  key: string;
+  emoji: string;
+  label: string;
+  teenDescription: string;
+}[] = [
+  { key: "achievement", emoji: "\uD83C\uDFC6", label: "Achievement", teenDescription: "Feeling proud of what you accomplish and being challenged" },
+  { key: "independence", emoji: "\uD83E\uDD85", label: "Independence", teenDescription: "Being able to do things your own way without someone breathing down your neck" },
+  { key: "recognition", emoji: "\u2B50", label: "Recognition", teenDescription: "Getting credit for your work and being known for what you do" },
+  { key: "relationships", emoji: "\uD83E\uDD1D", label: "Relationships", teenDescription: "Working with people you actually like and building real connections" },
+  { key: "stability", emoji: "\uD83D\uDEE1\uFE0F", label: "Stability", teenDescription: "Knowing your job is secure and you can count on a steady income" },
+  { key: "worklife", emoji: "\u2600\uFE0F", label: "Work-Life Balance", teenDescription: "Having time for your hobbies, friends, and life outside of work" },
+];
+
+// RIASEC to career category bridge (for backward compat)
+export const RIASEC_TO_CATEGORIES: Record<RiasecType, CareerCategory[]> = {
+  R: ["TRADES", "SPORTS"],
+  I: ["SCIENCE", "TECHNOLOGY"],
+  A: ["CREATIVE"],
+  S: ["HEALTH", "EDUCATION", "SERVICES"],
+  E: ["BUSINESS"],
+  C: ["BUSINESS", "TECHNOLOGY"],
+};
+
+// Reverse mapping: CareerCategory → RiasecType[] (derived from RIASEC_TO_CATEGORIES)
+export const CATEGORIES_TO_RIASEC: Record<CareerCategory, RiasecType[]> = (() => {
+  const result: Record<string, RiasecType[]> = {};
+  for (const [type, categories] of Object.entries(RIASEC_TO_CATEGORIES) as [RiasecType, CareerCategory[]][]) {
+    for (const cat of categories) {
+      if (!result[cat]) result[cat] = [];
+      if (!result[cat].includes(type)) result[cat].push(type);
+    }
+  }
+  return result as Record<CareerCategory, RiasecType[]>;
+})();
 
 // Legacy quiz questions kept for reference / backwards compat
 export const QUIZ_QUESTIONS: {

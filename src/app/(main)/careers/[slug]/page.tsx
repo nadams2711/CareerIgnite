@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatSalaryTeen, formatGrowthRateTeen } from "@/lib/utils";
 import { CAREER_CATEGORIES } from "@/lib/constants";
 import { CareerCoachDialog } from "@/components/coach/career-coach-dialog";
+import { RiasecMatchCard } from "@/components/careers/riasec-match-card";
 import { formatSalaryRange, formatGrowthRate } from "@/lib/utils";
 import type { CareerChallengesData } from "@/types";
 
@@ -41,6 +42,7 @@ export default async function CareerDetailPage({
   const categoryInfo = CAREER_CATEGORIES[career.category];
   // progression field no longer used — AI generates it dynamically
   const challenges = (career as any).challenges as CareerChallengesData | null;
+  const riasecCode = (career as any).riasecCode as string | null;
   const userState = user?.state ?? undefined;
 
   return (
@@ -98,6 +100,9 @@ export default async function CareerDetailPage({
           <span className="text-muted-foreground text-sm">to master</span>
         </div>
       </div>
+
+      {/* RIASEC Match Card */}
+      <RiasecMatchCard careerTitle={career.title} riasecCode={riasecCode} />
 
       {/* Pathways — prominently placed near top */}
       <Card className="rounded-2xl shadow-lg border-2 border-border border-t-4 border-t-blue-500">

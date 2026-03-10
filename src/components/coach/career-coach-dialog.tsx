@@ -149,17 +149,16 @@ export function CareerCoachDialog({
         >
           {messages.length === 0 && (
             <div className="text-center py-6">
-              <Bot className="h-10 w-10 text-card-foreground/50 mx-auto mb-3" />
-              <p className="text-sm text-card-foreground/70 mb-4">
+              <Bot className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
+              <p className="text-sm text-card-foreground mb-4">
                 Ask me anything about becoming a {careerTitle}!
               </p>
               <div className="flex flex-wrap justify-center gap-2">
                 {SUGGESTED_QUESTIONS.map((q) => (
                   <Button
                     key={q}
-                    variant="outline"
                     size="sm"
-                    className="text-xs text-card-foreground border-border hover:bg-muted"
+                    className="text-xs bg-blue-600 hover:bg-blue-700 text-white"
                     onClick={() => sendMessage(q)}
                   >
                     {q}
@@ -204,13 +203,13 @@ export function CareerCoachDialog({
         )}
 
         {/* Input */}
-        <form onSubmit={handleSubmit} className="flex gap-2 pt-2 border-t">
+        <form onSubmit={handleSubmit} className="flex gap-2 pt-2 border-t border-border">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={`Ask about ${careerTitle}...`}
             disabled={loading}
-            className="flex-1 bg-card text-card-foreground border-border"
+            className="flex-1 bg-muted text-card-foreground border-border placeholder:text-muted-foreground"
           />
           <Button
             type="submit"
